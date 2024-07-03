@@ -1,0 +1,81 @@
+DEVICE = "cuda"
+USE_AMP = False
+RESULTS = "results/best.txt"
+PROJECT_NAME = "supervised_temporal_transformer"
+
+PROJECT_ROOT = "/root/ext_pretrain_ser"
+SAVED_MODELS_PATH = f"{PROJECT_ROOT}/saved_models"
+PRETRAINED_CHKPT = f"{SAVED_MODELS_PATH}/models--laion--CLIP-ViT-B-32-laion2B-s34B-b79K.pth"
+PRETRAINED_CHKPT_JEPA = f"{SAVED_MODELS_PATH}/vitl16.pth"
+PRETRAINED_CHKPT_RESNET = f"{SAVED_MODELS_PATH}/20180408-102900-casia-webface.pt"
+MEDIAPIPE_SEGMENTER_MODEL = f"{SAVED_MODELS_PATH}/deeplab_v3.tflite"
+SSAST_MODEL_CHKPT = f"{SAVED_MODELS_PATH}/SSAST-Base-Patch-400.pth"
+NUM_DATA_WORKERS = 8
+NUM_DATASET_RECORDS = None#set to int, None uses all records
+
+FRAMES = 16
+CHANS = 3
+WIDTH = HEIGHT = 224
+NUM_MELS = 128
+ROLL_N = 1
+
+JPEG_HEADER = b"\xff\xd8"
+DEBUG = False
+MODEL_CFG = {
+    'embed_dim': 512, 
+    'vision_cfg': {'image_size': 224, 'layers': 12, 'width': 768, 'patch_size': 32}, 
+}
+
+# HYPERPARAMS
+BATCH_SZ = 60
+WARMUP_EPOCHS = 10
+CENTRE_CONSTANT = 0.5
+EPOCHS = WARMUP_EPOCHS + 40
+LR = 0.0001
+WEIGHT_DECAY = 0.2
+BETAS = (0.9, 0.999)
+MOMENTUM = 0.9
+LABELS = 8
+SPLIT = [0.95, 0.05, 0.0]
+SPLIT_FINETUNE = [0.8, 0.2, 0.0]
+TEST_SPLIT = [0.05, 0.95, 0.0]
+MILESTONES = [WARMUP_EPOCHS]
+T_0 = 30
+GAUSS_BLUR_KERNEL_SZ = 3
+# For partially supervised contrastive learning:
+# sets the fraction of labels available to the loss
+# function
+VISIBLE_LABELS_PCT = 0.0
+EDGE_DETECTION = False
+
+
+# MODEL PARAMS
+JEPA_PRETRAINED_CUTOFF = 12
+FREEZE_CLIP = False
+NUM_ATTN_HEADS = 8
+NUM_BOT_TOKENS = 4
+PT_ATTN_DROPOUT = 0.15
+ATTN_DROPOUT = 0.2 # 0.6
+LINEAR_DROPOUT = 0.1
+NUM_MM_LAYERS = 5
+APPLY_AUG = False
+T_OUT_DIM = 512
+HEAD_BASE_DIM = 256
+
+
+
+
+NUM_GLOBAL_VIEWS = 2
+NUM_LOCAL_VIEWS = 3
+TEMP_CONTRASTIVE = 0.2
+TEMP_STUDENT = 1
+TEMP_TEACHER = 1
+GLOBAL_VIEW_PCT = 0.75
+LOCAL_VIEW_PCT = 0.45
+NETWORK_MOMENTUM = 0.8
+CENTRE_MOMENTUM = 0.8
+
+BOTTLE_LAYER = 10
+FREEZE_FIRST = 0
+TOTAL_LAYERS = 14
+
