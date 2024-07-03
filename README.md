@@ -5,6 +5,7 @@
 git clone https://github.com/jayathungek/ext_pretrain_ser.git
 cd ext_pretrain_ser
 conda env create -f environment.yml
+mkdir saved_models
 ```
 
 ## Running tests
@@ -31,8 +32,10 @@ Some of these may require filling in a release form and waiting for approval:
 ## Usage
 ### Pretrained models
 Pretrained models have been uploaded here:
-* [SSAST-Base-Patch-400](https://www.dropbox.com/s/ewrzpco95n9jdz6/SSAST-Base-Patch-400.pth?dl=1)
-(Our pretrained one)
+* [SSAST-Base-Patch-400.pth](https://www.dropbox.com/s/ewrzpco95n9jdz6/SSAST-Base-Patch-400.pth?dl=1)
+    * Copy into `extpt/saved_models`
+* [ssast.base+mspodcast.tar](https://www.dropbox.com/scl/fi/323zrodunuvjtihsuylci/ssast.base-mspodcast.tar?rlkey=3miakel7ksrl5wv958rz46vns&st=xpi3kv0w&dl=0)
+    * Extract using `tar -xvf ssast.base+mspodcast.tar` into `extpt/saved_models`
 
 ### Sample pretraining code:
 
@@ -42,7 +45,7 @@ python -m extpt.train start \
     --name pretrain_mspodcast \ 
     --log-wandb \ 
     --dataset mspodcast \ 
-    --checkpoint-freq 5 \ 
+    --checkpoint-freq 5
 ```
 
 ###  Sample fine-tuning code
@@ -55,5 +58,5 @@ python -m extpt.train start \
     --checkpoint-freq 5 \ 
     --freeze-pt-weights \ 
     --embed-dim 688 \ 
-    --pretrained-name  unsupervised_ssast.base+mspodcast.pretrain_avd.guided.loss_specaugment.0_attn.loss.0.2
+    --pretrained-name  ssast.base+mspodcast
 ```
